@@ -27,7 +27,9 @@ class _MyCustomFormState extends State<MyCustomForm> {
   // Create a text controller and use it to retrieve the current value
   // of the TextField.
   final myController = TextEditingController();
-
+  final myController1 = TextEditingController();
+  final myController2 = TextEditingController();
+  final myController3 = TextEditingController();
   @override
   void dispose() {
     // Clean up the controller when the widget is disposed.
@@ -47,12 +49,13 @@ class _MyCustomFormState extends State<MyCustomForm> {
             const SizedBox(height: 65),
             const Text(
               'Welcome to RailGadi',
-              style: TextStyle(color: Colors.yellow, fontSize: 30),
+              style: TextStyle(color: Colors.red, fontSize: 30),
             ),
             const SizedBox(height: 20),
-            const Padding(
+            Padding(
               padding: EdgeInsets.symmetric(horizontal: 25.0),
               child: TextField(
+                controller: myController1,
                 decoration: InputDecoration(
                   hintText: 'BOX 1',
                   enabledBorder: OutlineInputBorder(
@@ -63,9 +66,10 @@ class _MyCustomFormState extends State<MyCustomForm> {
               ),
             ),
             const SizedBox(height: 20),
-            const Padding(
+            Padding(
               padding: EdgeInsets.symmetric(horizontal: 25.0),
               child: TextField(
+                controller: myController2,
                 decoration: InputDecoration(
                   hintText: 'BOX 2',
                   enabledBorder: OutlineInputBorder(
@@ -76,9 +80,10 @@ class _MyCustomFormState extends State<MyCustomForm> {
               ),
             ),
             const SizedBox(height: 20),
-            const Padding(
+            Padding(
               padding: EdgeInsets.symmetric(horizontal: 25.0),
               child: TextField(
+                controller: myController3,
                 decoration: InputDecoration(
                   hintText: 'BOX 3',
                   enabledBorder: OutlineInputBorder(
@@ -107,15 +112,11 @@ class _MyCustomFormState extends State<MyCustomForm> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        // When the user presses the button, show an alert dialog containing
-        // the text that the user has entered into the text field.
         onPressed: () {
           showDialog(
             context: context,
             builder: (context) {
               return AlertDialog(
-                // Retrieve the text the that user has entered by using the
-                // TextEditingController.
                 content: Text(myController.text),
               );
             },
