@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'config.dart';
 
 class Firstpage extends StatelessWidget {
   const Firstpage({super.key});
@@ -31,10 +32,6 @@ class _MyCustomFormState extends State<MyCustomForm> {
 
   final myController1 = TextEditingController();
 
-  var headers = {
-    'X-RapidAPI-Key': '07fd6aece4mshabbc768a80b7e62p1a3d6ajsnb926be3fadd6',
-    'X-RapidAPI-Host': 'pnr-status-indian-railway.p.rapidapi.com'
-  };
   var request = http.Request(
       'GET',
       Uri.parse(
