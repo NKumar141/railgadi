@@ -1,0 +1,15 @@
+// String sresponse = " ";
+  // Map mapresponse = {};
+  // Map dataresponse = {};
+
+  // Future apicall() async {
+  //   http.Response response;
+  //   response = await http.get(Uri.parse("https://reqres.in/api/users/2"));
+  //   if (response.statusCode == 200) {
+  //     setState(() {
+  //       sresponse = response.body;
+  //       mapresponse = json.decode(sresponse);
+  //       dataresponse = mapresponse['data'];
+  //     });
+  //   }
+  // }

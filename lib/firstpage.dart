@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'config.dart';
+import 'functions.dart';
 
 class Firstpage extends StatelessWidget {
   const Firstpage({super.key});
@@ -24,18 +25,14 @@ class MyCustomForm extends StatefulWidget {
   State<MyCustomForm> createState() => _MyCustomFormState();
 }
 
-// Define a corresponding State class.
-// This class holds the data related to the Form.
 class _MyCustomFormState extends State<MyCustomForm> {
   // Create a text controller and use it to retrieve the current value
   // of the TextField.
 
   final myController1 = TextEditingController();
 
-  var request = http.Request(
-      'GET',
-      Uri.parse(
-          'https://pnr-status-indian-railway.p.rapidapi.com/pnr-check/2734377912'));
+  var request = http.Request('GET',
+      Uri.parse('https://pnr-status-indian-railway.p.rapidapi.com/pnr-check/'));
 
   Map railresponse = {};
   String railres = "";
@@ -55,21 +52,6 @@ class _MyCustomFormState extends State<MyCustomForm> {
     }
   }
 
-  String sresponse = " ";
-  Map mapresponse = {};
-  Map dataresponse = {};
-  Future apicall() async {
-    http.Response response;
-    response = await http.get(Uri.parse("https://reqres.in/api/users/2"));
-    if (response.statusCode == 200) {
-      setState(() {
-        sresponse = response.body;
-        mapresponse = json.decode(sresponse);
-        dataresponse = mapresponse['data'];
-      });
-    }
-  }
-
   @override
   void dispose() {
     // Clean up the controller when the widget is disposed.
@@ -81,7 +63,7 @@ class _MyCustomFormState extends State<MyCustomForm> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Retrieve Text Input'),
+        title: const Text('Rail Gadi'),
       ),
       body: Center(
         child: ListView(
@@ -109,7 +91,7 @@ class _MyCustomFormState extends State<MyCustomForm> {
             const SizedBox(height: 20),
             Container(
               child: railresponse['data'] == null
-                  ? Text("load the data")
+                  ? Text("Enter PNR number pls")
                   //: Text(mapresponse['data'].toString()),
                   : Column(
                       children: [
@@ -146,17 +128,6 @@ class _MyCustomFormState extends State<MyCustomForm> {
                       ],
                     ),
             ),
-            ElevatedButton.icon(
-              onPressed: () {
-                apicall();
-                railapicall();
-              },
-              icon: const Icon(
-                Icons.adjust_outlined,
-                size: 24.0,
-              ),
-              label: Text('dabao'),
-            ),
             const SizedBox(height: 20),
             ElevatedButton.icon(
               onPressed: () {
@@ -167,31 +138,22 @@ class _MyCustomFormState extends State<MyCustomForm> {
                           'https://pnr-status-indian-railway.p.rapidapi.com/pnr-check/' +
                               myController1.text));
                 });
-                apicall();
+
                 railapicall();
               },
               icon: const Icon(
                 Icons.adjust_outlined,
                 size: 24.0,
               ),
-              label: Text(' JOR SE dabao'),
+              label: Text(' Get Details ! '),
             ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          showDialog(
-            context: context,
-            builder: (context) {
-              return AlertDialog(
-                content: Text(myController1.text),
-              );
-            },
-          );
-        },
-        tooltip: 'Show me the value!',
-        child: const Icon(Icons.text_fields),
+        onPressed: showNotification,
+        tooltip: 'Increment',
+        child: const Icon(Icons.add),
       ),
     );
   }
