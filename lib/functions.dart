@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'config.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'firstpage.dart';
 
 FlutterLocalNotificationsPlugin notificationsPlugin =
     FlutterLocalNotificationsPlugin();
@@ -33,7 +34,19 @@ void showNotification() {
 
   notificationsPlugin.show(
       0,
-      "WEll Well WEll",
-      "bodynsnsnsnsnsnsnsnsnsnsnnsnsnsnsnsnsnsnsnnsnsnsnsnsnsnsnsnsnsnnsnsnsnsnsnsnnssn",
+      railresponse['data'] == null
+          ? "Enter PNR number pls"
+          : railresponse['data']['trainInfo']['trainNo'].toString() +
+              "  " +
+              railresponse['data']['trainInfo']['name'].toString(),
+      railresponse['data'] == null
+          ? "Enter PNR number pls"
+          : railresponse['data']['seatInfo']['coach'].toString() +
+              "  " +
+              railresponse['data']['seatInfo']['berth'].toString() +
+              "   " +
+              railresponse['data']['boardingInfo']['stationName'].toString() +
+              "  " +
+              railresponse['data']['boardingInfo']['departureTime'].toString(),
       notiDetails);
 }
